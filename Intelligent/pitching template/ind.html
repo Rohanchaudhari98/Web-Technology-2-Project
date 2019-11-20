@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>question form</title>
+  
+  <style>
+ div.fixed {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 300px;
+    border: 3px solid #73AD21;
+}
+ </style>
+  
+  
+      <link rel="stylesheet" href="css/style.css">
+
+ 
+<script>
+		function init(){
+		
+		xhr = new XMLHttpRequest();	
+			if(xhr)
+			{
+				xhr.onreadystatechange = getContent;
+				xhr.open("GET", "count.png", true);
+				xhr.send(null);
+			}	
+		}
+		function getContent(){
+		
+		if(xhr.readyState=="4"&&xhr.status==200){
+				var arr=(xhr.responseText).split(";");
+				document.getElementById("secondary").innerHTML=arr[0];
+				document.getElementById("logo").innerHTML=arr[3]; 
+				document.getElementById("links").innerHTML=arr[3];
+				document.getElementById("picture").innerHTML=arr[3]; 
+				setTimeout(getPic, 4000);	
+		  }
+		
+		
+		}
+		function getPic(){
+		
+			xhr.open("GET", "Number.png", true);
+			xhr.onreadystatechange = showImg;
+			xhr.send(null);
+		
+		
+		}
+		function showImg()
+		{
+			if(xhr.readyState == 4 && xhr.status == 200)
+			{
+				document.getElementById("picture").innerHTML = xhr.responseText;	
+			}
+			setTimeout(getLinks,2000);
+			
+		}
+		function getLinks(){
+		
+				xhr.onreadystatechange=showLinks;
+				xhr.open("GET","links.txt",true);
+				xhr.send();
+		}
+		function showLinks(){
+		
+				if(xhr.readyState==4 && xhr.status==200){
+					document.getElementById("links").innerHTML=xhr.responseText
+					//TODO:
+					setTimeout(getAudio,4000);
+				}
+		
+		
+		}
+
+
+</script> 
+</head>
+
+<body>
+
+  <div id="step" class="sleep">1</div>
+<form id="hire_us">
+	<div class="fixed">
+		heyy
+	</div>
+	<p id="pin_0" class="click pulse">Get started</p>
+	<p id="pin_1"></p>
+	<p>
+		<input id="your_name" type="text" class="sleep" autocomplete="off" spellcheck="false" />
+
+	</p>
+	<p id="pin_2"></p>
+	<p>
+		<input id="email_address" type="email" class="sleep" autocomplete="off" spellcheck="false" />
+	</p>
+	<p id="pin_3"></p>
+	<p>
+		<input id="your_color" type="text" class="sleep" autocomplete="off" spellcheck="false" />
+	</p>
+	<p id="pin_4"></p>
+	<p id="pin_5"></p>
+	<p id="pin_6"></p>
+	<p id="type" contenteditable="true" class="sleep">Feel free to use <b>bold (Ctrl-B)</b>, <i>italics (Ctrl-I),</i> even <u>underlines (Ctrl-U)</u> if you must..</p>
+	<p id="pin_7"></p>
+	<input id="go" class="sleep" type="button" value="send us your pitch" />
+	<p id="pin_8"></p>
+	<p id="pin_9"></p>
+</form>
+  
+  
+
+    <script  src="js/index.js"></script>
+
+
+
+
+</body>
+
+</html>
